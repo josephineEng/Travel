@@ -82,7 +82,7 @@ nav{
     }
 
   .hero-page{
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("Images/hero1.jpg");
+    /* background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("Images/hero1.jpg"); */
     height: 50%;
     background-position: center;
     background-repeat: no-repeat;
@@ -413,57 +413,69 @@ img{
   vertical-align: middle;
 } 
 
-.hero-carousel {
-  position: relative;
+
+
+.carousel {
   width: 100%;
-  height: 400px; /* Set your desired height */
-  overflow: hidden;
+  height: 100%; 
+
 }
 
 .slides {
   display: flex;
-  transition: transform 0.5s ease-in-out;
+  height: 100%; 
+  transition: transform 0.5s ease;
+  position: relative;
+  border-radius: 10px;
 }
 
 .slide {
   flex: 0 0 100%;
   display: flex;
   align-items: center;
-}
-
-.slide img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
+  justify-content: center;
   height: 100%;
-}
+ 
 
+} 
 .slide-content {
+ 
   text-align: center;
-  color: white;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  color: white;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  border-radius: 10px;
 }
 
-.pagination {
+.slide-content h2,
+.slide-content p {
+  margin: 0;
+}
+
+.slide-content::before {
+  content: "";
   position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+  border-radius: 10px;
 }
 
-.pagination button {
-  background-color: #888;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  margin: 0 5px;
-  border: none;
+.slide:nth-child(1) .slide-content::before {
+  background-image: url('Images/hero1.jpg'); 
+}
+.slide:nth-child(2) .slide-content::before {
+  background-image: url('Images/city1.jpeg'); 
 }
 
-.pagination button.active {
-  background-color: #333;
-}

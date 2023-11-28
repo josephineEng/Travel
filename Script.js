@@ -1,34 +1,36 @@
-const slides = document.querySelectorAll('.slide');
-const pagination = document.querySelector('.pagination');
 
-let currentSlide = 0;
-let autoSlide = setInterval(nextSlide, 5000); // Change slide every 5 seconds
+$(document).ready(function() {
+  let slideIndex = 0;
+  showSlides();
 
-slides.forEach((slide, index) => {
-  const bullet = document.createElement('button');
-  bullet.classList.add('bullet');
-  if (index === 0) {
-    bullet.classList.add('active');
+  function showSlides() {
+    const slides = $('.hero-page .slide');
+    const dots = $('.hero-page .pagination');
+    
+    slides.hide();
+    dots.empty();
+
+    for (let i = 0; i < slides.length; i++) {
+      dots.append('<button class="dot"></button>');
+    }
+
+    slides.eq(slideIndex).fadeIn();
+    dots.find('button').eq(slideIndex).addClass('active');
+
+    slideIndex++;
+    if (slideIndex >= slides.length) {
+      slideIndex = 0;
+    }
+
+    setTimeout(showSlides, 3000); // Changes slide every 3 seconds
   }
-  bullet.addEventListener('click', () => {
-    goToSlide(index);
+
+  $('.hero-page .pagination button').on('click', function() {
+    const index = $(this).index();
+    slideIndex = index;
+    showSlides();
   });
-  pagination.appendChild(bullet);
+
+
 });
-
-function goToSlide(slideIndex) {
-  slides.forEach((slide, index) => {
-    slide.style.opacity = 0;
-    const bullets = document.querySelectorAll('.bullet');
-    bullets[index].classList.remove('active');
-  });
-  slides[slideIndex].style.opacity = 1;
-  bullets[slideIndex].classList.add('active');
-  currentSlide = slideIndex;
-}
-
-function nextSlide() {
-  currentSlide = (currentSlide + 1) % slides.length;
-  goToSlide(currentSlide);
-}
 
